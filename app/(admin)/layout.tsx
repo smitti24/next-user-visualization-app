@@ -10,7 +10,7 @@ function AdminLayout({
     <div className="flex flex-col flex-1">
       {/* <Header /> */}
 
-      <div className="flex flex-col flex-1 lg:flex-row bg-gray-100">
+      <div className="flex flex-col flex-1 lg:flex-row ">
         {/* <Sidebar /> */}
         <div className="item-start max-w-5xl mx-auto w-full">{children}</div>
       </div>
