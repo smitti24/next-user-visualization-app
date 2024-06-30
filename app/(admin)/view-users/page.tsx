@@ -38,14 +38,16 @@ function ViewUsers() {
   }, []);
 
   return (
-    <div>
+    <div className="mt-5">
       <Table>
-        <TableHeader>
+        <TableHeader className="bg-slate-600 font-bold">
           <TableRow>
-            <TableHead className="w-[100px]">Full name</TableHead>
-            <TableHead>Date of birth</TableHead>
-            <TableHead>Country</TableHead>
-            <TableHead className="text-right"></TableHead>
+            <TableHead className="text-white font-bold">Full name</TableHead>
+            <TableHead className="text-white font-bold">
+              Date of birth
+            </TableHead>
+            <TableHead className="text-white font-bold">Country</TableHead>
+            <TableHead className="text-white font-bold"></TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -57,7 +59,10 @@ function ViewUsers() {
               <TableCell>{data.birthdate}</TableCell>
               <TableCell>{data.country}</TableCell>
               <TableCell className="text-right">
-                <Button size="sm" className="px-3">
+                <Button
+                  size="sm"
+                  className="px-3 hover:bg-purple-600 hover:text-white"
+                >
                   <Search className="h-4 w-4" />
                 </Button>
               </TableCell>
