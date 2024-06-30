@@ -10,13 +10,15 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { User } from "@/types/types";
-import { Edit, Search } from "lucide-react";
+import { Search } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function ViewUsers() {
   const [data, setData] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,7 +48,9 @@ function ViewUsers() {
             <TableHead className="text-white font-bold">
               Date of birth
             </TableHead>
-            <TableHead className="text-white font-bold">Country</TableHead>
+            <TableHead className="text-white font-bold hidden md:table-cell">
+              Country
+            </TableHead>
             <TableHead className="text-white font-bold"></TableHead>
           </TableRow>
         </TableHeader>
@@ -57,11 +61,14 @@ function ViewUsers() {
                 {data.name} {data.surname}
               </TableCell>
               <TableCell>{data.birthdate}</TableCell>
-              <TableCell>{data.country}</TableCell>
+              <TableCell className="hidden md:table-cell">
+                {data.country}
+              </TableCell>
               <TableCell className="text-right">
                 <Button
                   size="sm"
-                  className="px-3 hover:bg-purple-600 hover:text-white"
+                  className="px-3 hover:bg-purple-600 hover:text-white "
+                  onClick={() => router.push(`/view-users/${data.number}`)}
                 >
                   <Search className="h-4 w-4" />
                 </Button>

@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 
 export default function RootLayout({
@@ -7,7 +8,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="min-h-screen flex">{children}</body>
+      <body className="min-h-screen flex">
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }
