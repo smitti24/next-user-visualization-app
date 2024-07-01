@@ -19,7 +19,7 @@ function Sidebar() {
         </li>
         <li className="flex-1">
           <Link
-            href="/"
+            href="/users-overview"
             className=" hover:opacity-50 flex flex-col text-center lg:text-left lg:flex-row items-center gap-2 p-5 rounded-md bg-purple-600"
           >
             <BarChart className="w-6 h-6 lg:w-8 lg:h-8" />

@@ -1,7 +1,7 @@
 import { USER_DATA } from "@/users";
-import { NextRequest } from "next/server";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default function handler(req: NextRequest, res: any) {
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         const data = USER_DATA;
 
