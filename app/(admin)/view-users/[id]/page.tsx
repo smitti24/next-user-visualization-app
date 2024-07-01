@@ -1,14 +1,18 @@
 "use client";
 
+import Loader from "@/components/Loader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
+import { useUserById } from "@/hooks/useUser";
 import { User } from "@/types/types";
 import { ArrowBigLeft, Edit, Save } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useState } from "react";
 
 const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
+  const { data, error, isLoading } = useUserById(id);
+
   const [user, setUser] = useState<User>({
     name: "",
     surname: "",
@@ -18,30 +22,17 @@ const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
     country: "",
     birthdate: "",
   });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
   const [isEditing, setIsEditing] = useState(false);
 
   const router = useRouter();
   const { toast } = useToast();
 
   useEffect(() => {
-    if (!id) return;
-    const fetchUser = async () => {
-      try {
-        const response = await fetch(`/api/${id}`);
-        if (!response.ok) throw new Error("Failed to fetch");
-        const userData = await response.json();
-        setUser(userData);
-      } catch (error: any) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [id]);
+    if (data) {
+      setUser(data);
+    }
+  }, [data]);
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -61,15 +52,15 @@ const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
     setIsEditing(false);
   };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (isLoading) return <Loader />;
+  if (error) return <div>Error</div>;
 
   return (
     <div className="flex flex-col space-y-2 bg-slate-600 text-white rounded-md p-5 mt-5 justify-between">
       <div className="flex justify-between">
         <h1 className="font-bold text-xl flex gap-2 items-center">
-          {user.name} {user.surname}
-          <span className="font-normal text-sm">({user.gender})</span>
+          {data.name} {data.surname}
+          <span className="font-normal text-sm">({data.gender})</span>
         </h1>
         <div className="flex gap-2">
           <Button
@@ -96,8 +87,8 @@ const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
             <Input
               className="max-w-[200px]"
               value={user.country}
-              placeholder="Chatbot Name..."
-              onChange={() => setUser({ ...user, country: user.country })}
+              placeholder="Country"
+              onChange={(e) => setUser({ ...user, country: e.target.value })}
               required
             />
           ) : (
@@ -111,7 +102,7 @@ const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
               className="max-w-[200px]"
               value={user.gender}
               placeholder="Chatbot Name..."
-              onChange={() => setUser({ ...user, gender: user.gender })}
+              onChange={(e) => setUser({ ...user, gender: e.target.value })}
               required
             />
           ) : (
@@ -125,7 +116,9 @@ const UserDetails = ({ params: { id } }: { params: { id: number } }) => {
               className="max-w-[200px]"
               value={user.dependants}
               placeholder="Dependents..."
-              onChange={() => setUser({ ...user, dependants: user.dependants })}
+              onChange={(e) =>
+                setUser({ ...user, dependants: +e.target.value })
+              }
               type="number"
               required
             />

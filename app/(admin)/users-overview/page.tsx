@@ -11,6 +11,7 @@ import { User } from "@/types/types";
 import { useMemo, useState } from "react";
 import PieChartComponent from "./Components/Charts/PieChart";
 import { useUser } from "@/hooks/useUser";
+import Loader from "@/components/Loader";
 
 interface CountryDependents {
   [key: string]: number;
@@ -47,7 +48,7 @@ function UsersOverview() {
     }));
   }, [data, gender]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>An error occurred</div>;
 
   return (

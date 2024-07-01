@@ -12,12 +12,13 @@ import {
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useUser } from "../../../hooks/useUser";
+import Loader from "@/components/Loader";
 
 function ViewUsers() {
   const { data, error, isLoading } = useUser();
   const router = useRouter();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loader />;
   if (error) return <div>An error occurred</div>;
 
   return (
