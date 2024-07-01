@@ -9,35 +9,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { User } from "@/types/types";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useUser } from "../../../hooks/useUser";
 
 function ViewUsers() {
-  const [data, setData] = useState<User[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const { data, error, isLoading } = useUser();
   const router = useRouter();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("/api/data");
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const jsonData: User[] = await response.json();
-        setData(jsonData);
-        setIsLoading(false);
-      } catch (error) {
-        setError("Failed to fetch data");
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>An error occurred</div>;
 
   return (
     <div className="mt-5">
@@ -55,7 +36,7 @@ function ViewUsers() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((data) => (
+          {data.map((data: any) => (
             <TableRow key={data.number}>
               <TableCell className="font-medium">
                 {data.name} {data.surname}

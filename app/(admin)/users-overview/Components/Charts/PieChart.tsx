@@ -1,7 +1,15 @@
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
+interface CountryDependents {
+  [key: string]: number;
+}
+
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
-function PieChartComponent({ dependentsData }: { dependentsData: any[] }) {
+function PieChartComponent({
+  dependentsData,
+}: {
+  dependentsData: { name: string; value: number }[];
+}) {
   return (
     <ResponsiveContainer width="100%" height={250}>
       <PieChart>
