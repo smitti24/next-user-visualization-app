@@ -1,4 +1,3 @@
-import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
 import { UserCircle2Icon } from "lucide-react";
 import Link from "next/link";
 
