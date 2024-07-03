@@ -34,4 +34,4 @@ The application should now be running on http://localhost:3000.
 ## Live Version
 
 To experience the full functionality of the application, including user authentication, visit the live site:
-[User Data Visualizer Dashboard](https://user-data-visualization-mk7aifh96-smitti24s-projects.vercel.app/login)
+[User Data Visualizer Dashboard](https://user-data-visualization-app.vercel.app/login)
