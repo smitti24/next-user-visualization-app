@@ -20,7 +20,7 @@ In the live running app, I have added Clerk as my auth provider, but ive created
 
 To run the application locally, follow these steps:
 
-1. Please pull the following branch:
+1. Please pull the following branch: https://github.com/smitti24/next-user-visualization-app/tree/realfi-dev-instance
 2. Open your terminal.
 3. Clone the repository and navigate to the project directory.
 4. Install dependencies:
