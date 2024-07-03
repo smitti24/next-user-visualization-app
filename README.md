@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# User Data Visualization Tool
 
-## Getting Started
+Welcome to the User Data Visualization Tool! This application is built using Next.js and uses Clerk for user authentication. Below you'll find the steps to get started with the application locally and how to access the live version.
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Before running the application, ensure you have the following installed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Node.js
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Setup Instructions
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Disable Authentication
 
-## Learn More
+If you want to run the application without authentication, follow these steps:
 
-To learn more about Next.js, take a look at the following resources:
+1. Navigate to `app/(admin)/layout.tsx`.
+2. Find and comment out the following code to disable the redirect to the login screen:
+   ```javascript
+   if (!userId) {
+     return redirect("/login");
+   }
+   ```
+   This will prevent the application from redirecting to the login page if no user is authenticated.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Running Locally
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+To run the application locally, follow these steps:
 
-## Deploy on Vercel
+1. Open your terminal.
+2. Clone the repository and navigate to the project directory.
+3. Install dependencies:
+   `npm i`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Start the development server:
+   `npm run dev`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The application should now be running on http://localhost:3000.
+
+## Live Version
+
+To experience the full functionality of the application, including user authentication, visit the live site:
+[User Data Visualizer Dashboard](https://user-data-visualization-mk7aifh96-smitti24s-projects.vercel.app/login)
