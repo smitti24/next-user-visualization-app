@@ -1,4 +1,5 @@
-import { User2Icon, UserCircle2Icon } from "lucide-react";
+import { SignedOut, SignInButton, SignedIn, UserButton } from "@clerk/nextjs";
+import { UserCircle2Icon } from "lucide-react";
 import Link from "next/link";
 
 function Header() {
@@ -11,7 +12,14 @@ function Header() {
           <h2 className="text-sm">A centralized hub to view your user data.</h2>
         </div>
       </Link>
-      <div className="flex items-center"></div>
+      <div className="flex items-center">
+        <SignedOut>
+          <SignInButton />
+        </SignedOut>
+        <SignedIn>
+          <UserButton showName />
+        </SignedIn>
+      </div>
     </header>
   );
 }
