@@ -12,29 +12,21 @@ Before running the application, ensure you have the following installed:
 
 ### Disable Authentication
 
-Since we are using Clerk as our auth provider, there is ofcouse private keys involved. So to run the application without the auth, we need to disable it.
+Since we are using Clerk as our auth provider, there is ofcourse private keys involved.
 
-If you want to run the application without authentication, follow these steps:
-
-1. Navigate to `app/(admin)/layout.tsx`.
-2. Find and comment out the following code to disable the redirect to the login screen:
-   ```javascript
-   if (!userId) {
-     return redirect("/login");
-   }
-   ```
-   This will prevent the application from redirecting to the login page if no user is authenticated.
+In the live running app, I have added Clerk as my auth provider, but ive created a branch for dev that can be pulled that does not contain authentication.
 
 ### Running Locally
 
 To run the application locally, follow these steps:
 
-1. Open your terminal.
-2. Clone the repository and navigate to the project directory.
-3. Install dependencies:
+1. Please pull the following branch: https://github.com/smitti24/next-user-visualization-app/tree/realfi-dev-instance
+2. Open your terminal.
+3. Clone the repository and navigate to the project directory.
+4. Install dependencies:
    `npm i`
 
-4. Start the development server:
+5. Start the development server:
    `npm run dev`
 
 The application should now be running on http://localhost:3000.
