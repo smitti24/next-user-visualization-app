@@ -12,14 +12,6 @@ function Header() {
           <h2 className="text-sm">A centralized hub to view your user data.</h2>
         </div>
       </Link>
-      <div className="flex items-center">
-        <SignedOut>
-          <SignInButton />
-        </SignedOut>
-        <SignedIn>
-          <UserButton showName />
-        </SignedIn>
-      </div>
     </header>
   );
 }
