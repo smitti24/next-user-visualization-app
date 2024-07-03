@@ -12,6 +12,7 @@ import { useMemo, useState } from "react";
 import PieChartComponent from "./Components/Charts/PieChart";
 import { useUser } from "@/hooks/useUser";
 import Loader from "@/components/Loader";
+import AgeGroupBarChart from "./Components/Charts/AgeGroupBarChart";
 
 interface CountryDependents {
   [key: string]: number;
@@ -48,6 +49,47 @@ function UsersOverview() {
     }));
   }, [data, gender]);
 
+  const calculateAge = (birthdate: string): number => {
+    const birthDate = new Date(birthdate);
+    const difference = Date.now() - birthDate.getTime();
+    const ageDate = new Date(difference);
+    return Math.abs(ageDate.getUTCFullYear() - 1970);
+  };
+
+  const processAgeGroupData = useMemo(() => {
+    const filteredData = data?.filter(
+      (user: User) =>
+        user.gender.toLowerCase() === gender.toLowerCase() ||
+        gender.toLowerCase() === "all" ||
+        gender === ""
+    );
+
+    const ageGroups: { [key: string]: number } = {
+      "Under 25": 0,
+      "25-34": 0,
+      "35-44": 0,
+      "45 and older": 0,
+    };
+
+    filteredData?.forEach((user: User) => {
+      const age = calculateAge(user.birthdate);
+      if (age < 25) {
+        ageGroups["Under 25"]++;
+      } else if (age < 35) {
+        ageGroups["25-34"]++;
+      } else if (age < 45) {
+        ageGroups["35-44"]++;
+      } else {
+        ageGroups["45 and older"]++;
+      }
+    });
+
+    return Object.keys(ageGroups).map((group) => ({
+      name: group,
+      count: ageGroups[group],
+    }));
+  }, [data, gender]);
+
   if (isLoading) return <Loader />;
   if (error) return <div>An error occurred</div>;
 
@@ -70,7 +112,9 @@ function UsersOverview() {
         <div className="w-[400px] h-[250px] border-white border-2 rounded-xl shadow-2xl mt-5">
           <PieChartComponent dependentsData={processDependentsData} />
         </div>
-        <div className="w-[350px] h-[250px]"></div>
+        <div className="w-[350px] h-[250px]">
+          <AgeGroupBarChart ageGroups={processAgeGroupData} />
+        </div>
       </div>
     </>
   );
