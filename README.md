@@ -12,6 +12,8 @@ Before running the application, ensure you have the following installed:
 
 ### Disable Authentication
 
+Since we are using Clerk as our auth provider, there is ofcouse private keys involved. So to run the application without the auth, we need to disable it.
+
 If you want to run the application without authentication, follow these steps:
 
 1. Navigate to `app/(admin)/layout.tsx`.
